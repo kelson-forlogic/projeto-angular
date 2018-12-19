@@ -1,3 +1,10 @@
-<div style="border: 5px solid black; width: 100%; height: 40px;">
-  header
-</div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="appComponent.sidenavMain.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Projeto01</span>
+    <span class="fill-space"></span>
+    <mat-icon class="example-icon">verified_user</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>

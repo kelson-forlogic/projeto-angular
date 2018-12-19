@@ -1,0 +1,20 @@
+mat-sidenav-container {
+	height: calc(100vh - 70px);
+}
+
+mat-sidenav {
+	width: 260px;
+}
+
+.page-container {
+    position: relative;
+    margin: 0;
+    min-width: calc(100% - 240px);
+    min-height: calc(100vh - 70px);
+    background-color: #f0f0f0;
+}
+
+.page-content {
+    padding: 8px;
+    height: calc(100vh - 120px);
+}
