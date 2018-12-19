@@ -14,27 +14,35 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { ListagemClienteComponent } from './listagem-cliente/listagem-cliente.component';
+import { ListagemAvaliacoesComponent } from './listagem-avaliacoes/listagem-avaliacoes.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        SidenavComponent,
-        FooterComponent,
-        Listagem1Component,
-        Listagem2Component,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSlideToggleModule,
-        MatSidenavModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    SidenavComponent,
+    FooterComponent,
+    Listagem1Component,
+    Listagem2Component,
+    ListagemClienteComponent,
+    ListagemAvaliacoesComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTableModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

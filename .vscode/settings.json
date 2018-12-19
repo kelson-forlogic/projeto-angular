@@ -1,0 +1,18 @@
+{
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\cmd.exe",
+    "workbench.sideBar.location": "left",
+    "workbench.activityBar.visible": true,
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": 0,
+    "html.format.wrapLineLength": 0,
+    "html.format.indentInnerHtml": true,
+    "html.format.preserveNewLines": true,
+    "editor.formatOnSave": false,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.autoSave": "off",
+    "html.format.unformatted": "null",
+    "git.autofetch": true,
+    "git.confirmSync": false
+  }
