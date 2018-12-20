@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Cadastro de Cliente</h1>
+<form>
+  <div mat-dialog-content>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Mês">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Ano">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Clientes" [formControl]="nomes" multiple>
+          <mat-option *ngFor="let nomes of listaDeNomes" [value]="nomes">{{ nomes }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button cdkFocusInitial>Salvar</button>
+</div>

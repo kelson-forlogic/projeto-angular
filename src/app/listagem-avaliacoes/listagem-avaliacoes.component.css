@@ -1,8 +1,19 @@
 .example-container {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 140px);
   overflow: auto;
 }
 
 table {
   width: 100%;
+}
+
+h4 {
+  padding-left: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
 }

@@ -18,6 +18,16 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { ListagemClienteComponent } from './listagem-cliente/listagem-cliente.component';
 import { ListagemAvaliacoesComponent } from './listagem-avaliacoes/listagem-avaliacoes.component';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CadastroClienteComponent } from './cadastro-cliente/cadastro-cliente.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { CadastroAvaliacaoComponent } from './cadastro-avaliacao/cadastro-avaliacao.component';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -29,9 +39,12 @@ import { ListagemAvaliacoesComponent } from './listagem-avaliacoes/listagem-aval
     Listagem2Component,
     ListagemClienteComponent,
     ListagemAvaliacoesComponent,
+    CadastroClienteComponent,
+    CadastroAvaliacaoComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -40,9 +53,23 @@ import { ListagemAvaliacoesComponent } from './listagem-avaliacoes/listagem-aval
     MatSlideToggleModule,
     MatSidenavModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
+  ],
+  entryComponents: [
+    CadastroClienteComponent,
+    CadastroAvaliacaoComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

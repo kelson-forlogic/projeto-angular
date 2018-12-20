@@ -7,8 +7,6 @@ import { ListagemClienteComponent } from './listagem-cliente/listagem-cliente.co
 import { ListagemAvaliacoesComponent } from './listagem-avaliacoes/listagem-avaliacoes.component';
 
 const routes: Routes = [
-  { path: 'l1', component: Listagem1Component },
-  { path: 'l2', component: Listagem2Component },
   { path: 'listagemClientes', component: ListagemClienteComponent },
   { path: 'listagemAvaliacoes', component: ListagemAvaliacoesComponent},
 
