@@ -1,0 +1,3 @@
+
+let minhaVar = 'minha variavel';
+
