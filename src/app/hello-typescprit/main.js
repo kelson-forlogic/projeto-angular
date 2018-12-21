@@ -1,1 +1,0 @@
-var minhaVar = 'minha variavel';
