@@ -2,6 +2,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.component';
+import { ClienteService } from '../services/cliente.service';
+import { Cliente } from '../interfaces/cliente.interface';
 
 @Component({
   selector: 'app-listagem-cliente',
@@ -10,41 +12,69 @@ import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.c
 })
 export class ListagemClienteComponent implements OnInit {
 
-  displayedColumns = ['nome', 'contato', 'data'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns = ['nome', 'contato', 'data', 'opcoes'];
+  dataSource;
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public service: ClienteService // injeção de dependência
   ) { }
 
-  openDialog(): void {
+  openDialog(cliente?: Cliente): void {
     const dialogRef = this.dialog.open(CadastroClienteComponent, {
-      width: '250px',
-      data: {nome: 'teste'}
+      width: '250px'
     });
+    dialogRef.componentInstance.cliente = cliente;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result) {
+        if (cliente) {
+          this.editar(result);
+        } else {
+          this.cadastrar(result);
+        }
+
+      }
+
     });
   }
 
+  ngOnInit() {
+    this.listar();
+  }
 
-  ngOnInit() { }
+  listar(): void {
+    this.service.listar().subscribe(res => {
+      // transforma a resposta que é um objeto em um array (lista) clientes
+      const clientes = Object.keys(res || {}).map((key) => {
+        return { id: key, ...res[key] };
+      });
+      this.dataSource = clientes;
+    });
+  }
+
+  cadastrar(cliente: Cliente): void {
+    // this.openDialog();
+    this.service.cadastrar(cliente).subscribe(res => {
+      console.log(res);
+      this.listar();
+    });
+  }
+
+  remover(id: string): void {
+    this.service.remover(id).subscribe(res => {
+      this.listar();
+    });
+  }
+
+  editar(cliente: Cliente): void {
+    this.service.editar(cliente).subscribe(res => {
+      this.listar();
+    });
+  }
 
 }
 
-const ELEMENT_DATA: Cliente[] = [
-  { nome: 'Siborn', contato: 'Hyon', data: new Date(2018, 4, 2) },
-  { nome: 'Volplozo', contato: 'Kialze', data: new Date(2019, 5, 1) },
-  { nome: 'Kiuzezur', contato: 'Wuldluo', data: new Date(2015, 1, 2) },
-  { nome: 'Felapuon', contato: 'Othmza', data: new Date(2017, 5, 1) },
-  { nome: 'Delthen', contato: 'Celebvoi', data: new Date(2018, 3, 4) }
-];
 
-export interface Cliente {
-  nome: string;
-  contato: string;
-  data: Date;
-}
 
 

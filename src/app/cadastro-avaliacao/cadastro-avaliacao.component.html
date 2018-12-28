@@ -1,15 +1,15 @@
-<h1 mat-dialog-title>Cadastro de Cliente</h1>
+<h1 mat-dialog-title>Cadastro de Avaliacao</h1>
 <form>
   <div mat-dialog-content>
     <div class="example-container">
       <mat-form-field>
-        <input matInput placeholder="Mês">
+        <input #mes matInput placeholder="Mês">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Ano">
+        <input #ano matInput placeholder="Ano">
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Clientes" [formControl]="nomes" multiple>
+        <mat-select #nomes placeholder="Clientes" multiple>
           <mat-option *ngFor="let nomes of listaDeNomes" [value]="nomes">{{ nomes }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -17,6 +17,6 @@
   </div>
 </form>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button cdkFocusInitial>Salvar</button>
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="salvar()">Salvar</button>
 </div>

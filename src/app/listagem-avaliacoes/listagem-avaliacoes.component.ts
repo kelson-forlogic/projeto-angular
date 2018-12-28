@@ -1,6 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { AvaliacaoService } from '../services/avaliacao.service';
 import { CadastroAvaliacaoComponent } from '../cadastro-avaliacao/cadastro-avaliacao.component';
+import { Avaliacao } from '../interfaces/avaliacao.interface';
 
 @Component({
   selector: 'app-listagem-avaliacoes',
@@ -9,36 +12,69 @@ import { CadastroAvaliacaoComponent } from '../cadastro-avaliacao/cadastro-avali
 })
 export class ListagemAvaliacoesComponent implements OnInit {
 
-  displayedColumns = ['ref', 'nome'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns = ['ref', 'clientes', 'opcoes'];
+  dataSource;
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public service: AvaliacaoService
   ) { }
 
-  openDialog(): void {
+  openDialog(avaliacao?: Avaliacao): void {
     const dialogRef = this.dialog.open(CadastroAvaliacaoComponent, {
-      width: '250px',
-      data: {nome: 'teste'}
+      width: '250px'
     });
+    dialogRef.componentInstance.avaliacao = avaliacao;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result)
+        this.cadastrar(result);
     });
   }
 
-  ngOnInit() { }
-}
 
-const ELEMENT_DATA: Avaliacao[] = [
-  { ref: new Date(2012, 4), nome: 'Ximalas' },
-  { ref: new Date(2015, 2), nome: 'Laivu' },
-  { ref: new Date(2016, 5), nome: 'Wosulond' },
-  { ref: new Date(2017, 1), nome: 'Bakmeku' },
-  { ref: new Date(2019, 2), nome: 'Gorcoina' }
-];
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(CadastroAvaliacaoComponent, {
+  //     width: '250px'
+  //   });
 
-export interface Avaliacao {
-  ref: Date;
-  nome: string;
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result)
+  //       this.cadastrar(result);
+  //   });
+  // }
+
+  ngOnInit() {
+    this.listar();
+  }
+
+  listar(): void {
+    this.service.listar().subscribe(res => {
+
+      // transforma a resposta que é um objeto em um array (lista) clientes
+      const avaliacao = Object.keys(res || {}).map((key) => {
+        return { id: key, ...res[key] };
+      });
+      this.dataSource = avaliacao;
+    });
+  }
+
+  cadastrar(avaliacao: Avaliacao): void {
+    this.service.cadastrar(avaliacao).subscribe(res => {
+      console.log(res);
+      this.listar();
+    });
+  }
+
+  remover(id: string): void {
+    this.service.remover(id).subscribe(res => {
+      this.listar();
+    });
+  }
+
+  editar(id: string, avaliacao: Avaliacao): void {
+    this.service.editar(id, avaliacao).subscribe(res => {
+      this.listar();
+    });
+  }
 }

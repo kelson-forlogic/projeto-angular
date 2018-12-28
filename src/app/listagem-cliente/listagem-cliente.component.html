@@ -1,6 +1,13 @@
 <div class="header">
   <h4>Listagem de Clientes</h4>
-  <button mat-flat-button (click)="openDialog()" color="primary">Adicionar</button>
+  <div>
+    <button mat-icon-button (click)="openDialog()" color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button [style.margin-left.px]="10" mat-icon-button (click)="listar()" color="primary">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
 </div>
 
 <div class="example-container mat-elevation-z8">
@@ -22,6 +29,18 @@
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef> Data </th>
       <td mat-cell *matCellDef="let element"> {{ element.data | date: 'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="opcoes">
+      <th mat-header-cell *matHeaderCellDef> Opções </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="remover(element.id)" color="primary">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="openDialog(element)" color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

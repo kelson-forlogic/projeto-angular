@@ -24,8 +24,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { CadastroAvaliacaoComponent } from './cadastro-avaliacao/cadastro-avaliacao.component';
-import {MatSelectModule} from '@angular/material/select';
-
+import { MatSelectModule } from '@angular/material/select';
+import { ClienteService } from './services/cliente.service';
+import { AvaliacaoService } from './services/avaliacao.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpInterceptorProviders } from './services/http-interceptors';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -56,11 +60,16 @@ import {MatSelectModule} from '@angular/material/select';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
+    ClienteService,
+    AvaliacaoService,
+    HttpInterceptorProviders,
+    DatePipe
   ],
   entryComponents: [
     CadastroClienteComponent,
