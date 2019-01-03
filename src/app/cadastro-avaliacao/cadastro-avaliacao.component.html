@@ -1,15 +1,18 @@
 <h1 mat-dialog-title>Cadastro de Avaliacao</h1>
-<form>
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
   <div mat-dialog-content>
     <div class="example-container">
       <mat-form-field>
-        <input #mes matInput placeholder="Mês">
+        <input formControlName="mes" matInput placeholder="Mês">
+        <mat-error *ngIf="formulario.get('mes').hasError('required')">Campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input #ano matInput placeholder="Ano">
+        <input formControlName="ano" matInput placeholder="Ano">
+        <mat-error *ngIf="formulario.get('ano').hasError('required')">Campo obrigatório</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <mat-select #nomes placeholder="Clientes" multiple>
+        <mat-error *ngIf="formulario.get('clientes').hasError('required')">Campo obrigatório</mat-error>
+        <mat-select formControlName="clientes" placeholder="Clientes" multiple>
           <mat-option *ngFor="let nomes of listaDeNomes" [value]="nomes">{{ nomes }}</mat-option>
         </mat-select>
       </mat-form-field>

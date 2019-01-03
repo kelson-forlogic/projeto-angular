@@ -20,6 +20,10 @@ export class ListagemClienteComponent implements OnInit {
     public service: ClienteService // injeção de dependência
   ) { }
 
+  ngOnInit() {
+    this.listar();
+  }
+
   openDialog(cliente?: Cliente): void {
     const dialogRef = this.dialog.open(CadastroClienteComponent, {
       width: '250px'
@@ -27,20 +31,9 @@ export class ListagemClienteComponent implements OnInit {
     dialogRef.componentInstance.cliente = cliente;
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        if (cliente) {
-          this.editar(result);
-        } else {
-          this.cadastrar(result);
-        }
-
-      }
-
+      if (result)
+        this.save(result);
     });
-  }
-
-  ngOnInit() {
-    this.listar();
   }
 
   listar(): void {
@@ -53,10 +46,8 @@ export class ListagemClienteComponent implements OnInit {
     });
   }
 
-  cadastrar(cliente: Cliente): void {
-    // this.openDialog();
-    this.service.cadastrar(cliente).subscribe(res => {
-      console.log(res);
+  save(cliente: Cliente): void {
+    this.service.save(cliente).subscribe(res => {
       this.listar();
     });
   }
@@ -66,15 +57,19 @@ export class ListagemClienteComponent implements OnInit {
       this.listar();
     });
   }
-
-  editar(cliente: Cliente): void {
-    this.service.editar(cliente).subscribe(res => {
-      this.listar();
-    });
-  }
-
 }
 
+// cadastrar(cliente: Cliente): void {
+//   this.service.cadastrar(cliente).subscribe(res => {
+//     this.listar();
+//   });
+// }
+
+// editar(cliente: Cliente): void {
+//   this.service.editar(cliente).subscribe(res => {
+//     this.listar();
+//   });
+// }
 
 
 

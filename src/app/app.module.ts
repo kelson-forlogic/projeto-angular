@@ -17,7 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ListagemClienteComponent } from './listagem-cliente/listagem-cliente.component';
 import { ListagemAvaliacoesComponent } from './listagem-avaliacoes/listagem-avaliacoes.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CadastroClienteComponent } from './cadastro-cliente/cadastro-cliente.component';
 import { MatInputModule } from '@angular/material/input';
@@ -30,6 +30,8 @@ import { AvaliacaoService } from './services/avaliacao.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorProviders } from './services/http-interceptors';
 import { DatePipe } from '@angular/common';
+import { TemplateFormComponent } from './forms/template-form/template-form.component';
+import { DataFormComponent } from './forms/data-form/data-form.component';
 
 @NgModule({
   declarations: [
@@ -41,10 +43,11 @@ import { DatePipe } from '@angular/common';
     ListagemAvaliacoesComponent,
     CadastroClienteComponent,
     CadastroAvaliacaoComponent,
+    TemplateFormComponent,
+    DataFormComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -60,6 +63,7 @@ import { DatePipe } from '@angular/common';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    FormsModule,
     MatSelectModule,
     HttpClientModule
   ],

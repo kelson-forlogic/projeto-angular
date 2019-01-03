@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDatepicker } from '@angular/material';
 import { DatePipe } from '@angular/common';
-import { Cliente } from '../interfaces/cliente.interface';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Cliente } from './../interfaces/cliente.interface';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -10,11 +11,12 @@ import { Cliente } from '../interfaces/cliente.interface';
 })
 export class CadastroClienteComponent implements OnInit {
 
-  @ViewChild('cliente') clienteRef: ElementRef;
-  @ViewChild('contato') contatoRef: ElementRef;
-  @ViewChild('data') dataRef: ElementRef;
-  @ViewChild('picker') pickerRef: MatDatepicker<Date>;
+  // @ViewChild('cliente') clienteRef: ElementRef;
+  // @ViewChild('contato') contatoRef: ElementRef;
+  // @ViewChild('data') dataRef: ElementRef;
+  // @ViewChild('picker') pickerRef: MatDatepicker<Date>;
 
+  formulario: FormGroup;
   cliente: Cliente;
 
   constructor(
@@ -24,11 +26,16 @@ export class CadastroClienteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.formulario = new FormGroup({
+      id: new FormControl(null),
+      cliente: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(100)])),
+      contato: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(100)])),
+      data: new FormControl(null, Validators.compose([Validators.required])),
+    });
+
     if (this.cliente) {
-      this.clienteRef.nativeElement.value = this.cliente.nome;
-      this.contatoRef.nativeElement.value = this.cliente.contato;
-      this.pickerRef.select(new Date(this.cliente.data));
-      this.dataRef.nativeElement.value = this.datePipe.transform(new Date(this.cliente.data), 'MM/dd/yyyy');
+      // joga os dados do objeto this.cliente para as propriedades do form
+      this.formulario.patchValue(this.cliente);
     }
   }
 
@@ -37,13 +44,21 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   salvar(): void {
-    const obj = {
-      id: this.cliente ? this.cliente.id : null,
-      nome: this.clienteRef.nativeElement.value,
-      contato: this.contatoRef.nativeElement.value,
-      data: new Date(this.dataRef.nativeElement.value)
-    };
+    this.formulario.controls.cliente.markAsTouched();
+    this.formulario.controls.contato.markAsTouched();
+    this.formulario.controls.data.markAsTouched();
+
+    if (this.formulario.invalid)
+      return;
+    // pega os dados do formulario e atribui em um objeto vazio {}
+    const obj = Object.assign({}, this.formulario.value);
     this.dialogRef.close(obj);
+    // const obj = {
+    // id: this.cliente ? this.cliente.id : null,
+    // nome: this.clienteRef.nativeElement.value,
+    // contato: this.contatoRef.nativeElement.value,
+    // data: new Date(this.dataRef.nativeElement.value)
+    // };
   }
 
 }

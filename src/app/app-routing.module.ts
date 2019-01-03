@@ -5,6 +5,9 @@ import { ListagemClienteComponent } from './listagem-cliente/listagem-cliente.co
 import { ListagemAvaliacoesComponent } from './listagem-avaliacoes/listagem-avaliacoes.component';
 
 const routes: Routes = [
+  // { path: 'templateForm', component: TemplateFormComponent},
+  // { path: 'dataForm', component: DataFormComponent},
+
   { path: 'listagemClientes', component: ListagemClienteComponent },
   { path: 'listagemAvaliacoes', component: ListagemAvaliacoesComponent},
 

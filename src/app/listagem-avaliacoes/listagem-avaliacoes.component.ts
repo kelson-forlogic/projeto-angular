@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AvaliacaoService } from '../services/avaliacao.service';
@@ -21,17 +20,15 @@ export class ListagemAvaliacoesComponent implements OnInit {
   ) { }
 
   openDialog(avaliacao?: Avaliacao): void {
-    const dialogRef = this.dialog.open(CadastroAvaliacaoComponent, {
-      width: '250px'
-    });
+    const dialogRef = this.dialog.open(CadastroAvaliacaoComponent);
     dialogRef.componentInstance.avaliacao = avaliacao;
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result)
-        this.cadastrar(result);
+      if (result) {
+        this.save(result);
+      }
     });
   }
-
 
   // openDialog(): void {
   //   const dialogRef = this.dialog.open(CadastroAvaliacaoComponent, {
@@ -59,9 +56,8 @@ export class ListagemAvaliacoesComponent implements OnInit {
     });
   }
 
-  cadastrar(avaliacao: Avaliacao): void {
-    this.service.cadastrar(avaliacao).subscribe(res => {
-      console.log(res);
+  save(avaliacao: Avaliacao): void {
+    this.service.save(avaliacao).subscribe(res => {
       this.listar();
     });
   }
@@ -72,9 +68,16 @@ export class ListagemAvaliacoesComponent implements OnInit {
     });
   }
 
-  editar(id: string, avaliacao: Avaliacao): void {
-    this.service.editar(id, avaliacao).subscribe(res => {
-      this.listar();
-    });
-  }
 }
+
+// cadastrar(avaliacao: Avaliacao): void {
+//   this.service.cadastrar(avaliacao).subscribe(res => {
+//     console.log(res);
+//     this.listar();
+//   });
+// }
+// editar(avaliacao: Avaliacao): void {
+//   this.service.editar(avaliacao).subscribe(res => {
+//     this.listar();
+//   });
+// }
