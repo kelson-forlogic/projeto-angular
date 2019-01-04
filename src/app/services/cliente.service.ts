@@ -20,6 +20,11 @@ export class ClienteService {
     return this.http.delete(url);
   }
 
+  save(cliente: Cliente): Observable<any> {
+    const method = cliente.id ? this.http.put : this.http.post;
+    const url = `http://desafio4devs.forlogic.net/api/customers/${(cliente.id ? cliente.id : '')}`;
+    return method.bind(this.http)(url, cliente);
+  }
   // cadastrar(cliente: Cliente): Observable<any> {
   //   return this.http.post('http://desafio4devs.forlogic.net/api/customers/', cliente);
   // }
@@ -29,10 +34,5 @@ export class ClienteService {
   //   return this.http.put(url, cliente);
   // }
 
-  save(cliente: Cliente): Observable<any> {
-    const method = cliente.id ? this.http.put : this.http.post;
-    const url = `http://desafio4devs.forlogic.net/api/customers/${(cliente.id ? cliente.id : '')}`;
-    return method.bind(this.http)(url, cliente);
-  }
 
 }

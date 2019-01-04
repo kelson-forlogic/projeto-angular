@@ -1,5 +1,5 @@
 mat-sidenav-container {
-	height: calc(100vh - 70px);
+	height: calc(100vh - 64px);
 }
 
 mat-sidenav {
@@ -10,7 +10,7 @@ mat-sidenav {
     position: relative;
     margin: 0;
     min-width: calc(100% - 240px);
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 64px);
     background-color: #f0f0f0;
 }
 

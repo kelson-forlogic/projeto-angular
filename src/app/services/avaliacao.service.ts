@@ -24,7 +24,6 @@ export class AvaliacaoService {
     const method = avaliacao.id ? this.http.put : this.http.post;
     const url = `${'http://desafio4devs.forlogic.net/api/evaluations'}/${(avaliacao.id ? avaliacao.id : '')}`;
     return method.bind(this.http)(url, avaliacao);
-    console.log(url);
   }
 
   // editar(avaliacao: Avaliacao): Observable<any> {

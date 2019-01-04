@@ -47,10 +47,10 @@ export class ListagemAvaliacoesComponent implements OnInit {
 
   listar(): void {
     this.service.listar().subscribe(res => {
-
       // transforma a resposta que é um objeto em um array (lista) clientes
       const avaliacao = Object.keys(res || {}).map((key) => {
-        return { id: key, ...res[key] };
+        const obj = { id: key, ...res[key] };
+        return obj;
       });
       this.dataSource = avaliacao;
     });
